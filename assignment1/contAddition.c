@@ -11,9 +11,9 @@ int main(int argc, char *argv[]){
 
     double trueValue = 1.0;
 
-    printf("Approximate Value: %2.64g\n", sum);
-    printf("Absolute Error: %2.64g\n", (trueValue - sum)<0 ? (-1.0)*(trueValue - sum): (trueValue - sum));
-    printf("Relative Error: %2.64g\n", ((trueValue - sum)<0 ? (-1.0)*(trueValue - sum): (trueValue - sum))/trueValue);
+    printf("Approximate Value: %2.52g\n", sum);
+    printf("Absolute Error: %2.52g\n", (trueValue - sum)<0 ? (-1.0)*(trueValue - sum): (trueValue - sum));
+    printf("Relative Error: %2.52g\n", ((trueValue - sum)<0 ? (-1.0)*(trueValue - sum): (trueValue - sum))/trueValue);
      
     /* 
     Why does the computer differ from the true value?

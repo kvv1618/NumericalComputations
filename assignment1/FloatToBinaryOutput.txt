@@ -1,3 +1,3 @@
-Precision: 100
+Precision: 5
 Enter a decimal number with no more than 6 decimal digits: 
-.0001100110011001100110011001100110011001100110011001101
+.00011
