@@ -1,7 +1,7 @@
 #include<stdio.h>
 #include<stdlib.h>
 #include<string.h>
-#include<cblas.h>  
+#include <lapacke.h>
 
 void LU_T_matrix(int n_rows, int n_cols, double equation_A[n_rows][n_cols+1]){
     double lower_T_matrix[n_rows][n_cols];
@@ -56,7 +56,7 @@ void solve_X(int n_rows, int n_cols, double equation_A[n_rows][n_cols+1]){
 int main(int argc, char *argv[]){
     int n_rows = argc > 1 ? atoi(argv[1]) : 3, n_cols = argc > 2 ? atoi(argv[2]) : 3;
     double B[] = {9, -6, 4};
-    double A[n_rows][n_cols],equation_A[n_rows][n_cols+1];
+    double A[n_rows * n_cols],equation_A[n_rows][n_cols+1];
 
     char input[n_cols*2], *token;
     for (int i=0; i<n_rows; i++){
@@ -67,7 +67,7 @@ int main(int argc, char *argv[]){
         // Loop through the tokens and print each one
         while (token != NULL) {
             equation_A[i][j] = atof(token);
-            A[i][j] = atof(token);
+            A[j*n_rows+i] = atof(token);
             j+=1;
             token = strtok(NULL, " ");  // Get the next token
         }
@@ -78,6 +78,20 @@ int main(int argc, char *argv[]){
     }
     LU_T_matrix(n_rows, n_cols, equation_A);
     solve_X(n_rows, n_cols, equation_A);
+
+    int nhrs = 1, ipiv[n_rows], info;
+
+    dgesv_(&n_rows, &nhrs, A, &n_rows, ipiv, B, &n_cols, &info);
+
+    if(info == 0){
+        printf("Solution using dgesv from LAPACK\n");
+        for(int i=0; i<n_rows; i++){
+            printf("%lf\n", B[i]);
+        }
+    }
+    else{
+        printf("Solution not found\n");
+    }
 
     return 0;
 }
