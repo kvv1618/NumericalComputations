@@ -22,9 +22,11 @@ void LU_T_matrix(int n_rows, int n_cols, double equation_A[n_rows][n_cols+1]){
             }
         }
     }
+    double det = 1;
     printf("Upper Triangular Matrix\n");
     for(int i=0; i<n_rows; i++){
         for(int j=0; j<n_cols; j++){
+            det*=equation_A[i][j];
             printf("%lf ", equation_A[i][j]);
         }
         printf("\n");
@@ -36,6 +38,7 @@ void LU_T_matrix(int n_rows, int n_cols, double equation_A[n_rows][n_cols+1]){
         }
         printf("\n");
     }
+    printf("Determinant of the matrix: %lf\n", det);
 }
 
 void solve_X(int n_rows, int n_cols, double equation_A[n_rows][n_cols+1]){
@@ -91,6 +94,19 @@ int main(int argc, char *argv[]){
     }
     else{
         printf("Solution not found\n");
+    }
+    
+    double rcond = 0.0, work[4*n_rows], anorm=15;
+    int iwork[n_rows];
+    char norm = '1';
+
+    dgecon_(&norm, &n_rows, A, &n_rows, &anorm, &rcond, work, iwork, &info);
+
+    if(info == 0){
+        printf("1 Norm Condition number of the matrix: %lf\n", 1/rcond);
+    }
+    else{
+        printf("Condition number not found\n");
     }
 
     return 0;
