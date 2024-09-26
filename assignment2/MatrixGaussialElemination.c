@@ -58,21 +58,19 @@ void solve_X(int n_rows, int n_cols, double equation_A[n_rows][n_cols+1]){
 
 int main(int argc, char *argv[]){
     int n_rows = argc > 1 ? atoi(argv[1]) : 3, n_cols = argc > 2 ? atoi(argv[2]) : 3;
-    double B[] = {9, -6, 4};
+    double B[n_rows];
+    for(int i=0; i<n_rows; i++){
+        scanf("%lf", &B[i]);
+    }
     double A[n_rows * n_cols],equation_A[n_rows][n_cols+1];
 
-    char input[n_cols*2], *token;
-    for (int i=0; i<n_rows; i++){
-        int j = 0;
-        scanf(" %[^\n]", input);
-        token = strtok(input, " ");
+    for (int i=0; i<n_rows*n_cols; i++){
+        scanf("%lf", &A[i]);
+    }
 
-        // Loop through the tokens and print each one
-        while (token != NULL) {
-            equation_A[i][j] = atof(token);
-            A[j*n_rows+i] = atof(token);
-            j+=1;
-            token = strtok(NULL, " ");  // Get the next token
+    for(int i=0; i<n_rows; i++){
+        for(int j=0; j<n_cols; j++){
+            equation_A[i][j] = A[i*n_cols+j];
         }
     }
 
