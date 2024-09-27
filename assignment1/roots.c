@@ -58,7 +58,7 @@ void root_cal_newton(double root, double tolerance, double m, int nu_iterations)
 
 int main()
 {
-  double tolerance=0.0125, root1=0.3, root2=0.5, abs_error=0;
+  double tolerance=0.0125, root1=0.3, root2=0.5;
   
   int nu_iterations = 1;
 
