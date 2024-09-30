@@ -1,5 +1,5 @@
 /*
-When we balance the weight of the ball and the buoyancy fource; we end up with the equation;
+When we balance the weight of the ball and the buoyancy force; we end up with the equation;
 x^3 - 3x^2 + (2/9.8)*(10^-3) = 0; where x = h/r where h is the height of the ball in the water and r is the radius of the ball.
 */
 

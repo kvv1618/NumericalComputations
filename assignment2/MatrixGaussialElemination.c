@@ -26,7 +26,9 @@ void LU_T_matrix(int n_rows, int n_cols, double equation_A[n_rows][n_cols+1]){
     printf("Upper Triangular Matrix\n");
     for(int i=0; i<n_rows; i++){
         for(int j=0; j<n_cols; j++){
-            det*=equation_A[i][j];
+            if(i==j){
+                det*=equation_A[i][j];
+            }
             printf("%lf ", equation_A[i][j]);
         }
         printf("\n");
@@ -62,21 +64,38 @@ int main(int argc, char *argv[]){
     for(int i=0; i<n_rows; i++){
         scanf("%lf", &B[i]);
     }
+    printf("Values in B\n");
+    for(int i=0; i<n_rows; i++){
+        printf("%lf\n", B[i]);
+    }
     double A[n_rows * n_cols],equation_A[n_rows][n_cols+1];
 
-    for (int i=0; i<n_rows*n_cols; i++){
-        scanf("%lf", &A[i]);
-    }
+    char input[n_cols*2], *token;    
+    for (int i=0; i<n_rows; i++){
+        int j = 0;
+        scanf(" %[^\n]", input);
+        token = strtok(input, " ");
 
-    for(int i=0; i<n_rows; i++){
-        for(int j=0; j<n_cols; j++){
-            equation_A[i][j] = A[i*n_cols+j];
+        // Loop through the tokens and print each one
+        while (token != NULL) {
+            equation_A[i][j] = atof(token);
+            A[j*n_rows+i] = atof(token);
+            j+=1;
+            token = strtok(NULL, " ");  // Get the next token
         }
     }
 
     for(int i=0; i<n_rows; i++){
         equation_A[i][n_cols] = B[i];
     }
+    printf("Values in equation_A\n");
+    for(int i=0; i<n_rows; i++){
+        for(int j=0; j<n_cols; j++){
+            printf("%lf ", equation_A[i][j]);
+        }
+        printf("\n");
+    }
+    
     LU_T_matrix(n_rows, n_cols, equation_A);
     solve_X(n_rows, n_cols, equation_A);
 

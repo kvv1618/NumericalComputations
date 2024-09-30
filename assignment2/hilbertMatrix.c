@@ -39,7 +39,7 @@ int main(int argc, char *argv[]) {
         char norm = '1';
         dgecon_(&norm, &dimentions, hilbertMatrixColumnMajor, &dimentions, &anorm, &rcond, work, iwork, &info);
         if (info == 0) {
-            printf("1 Norm Condition number of Hilbert matrix of order 9: %lf\n", 1/rcond);
+            printf("1 Norm Condition number of Hilbert matrix of order %d is: %lf\n", n, 1/rcond);
         }
         else {
             printf("Error in computing condition number\n");
