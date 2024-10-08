@@ -1,6 +1,6 @@
 /*
 When we balance the weight of the ball and the buoyancy force; we end up with the equation;
-x^3 - 3x^2 + (2/9.8)*(10^-3) = 0; where x = h/r where h is the height of the ball in the water and r is the radius of the ball.
+1000*(x^3) - 3000(x^2) + 2 = 0; where x = h/r where h is the height of the ball in the water and r is the radius of the ball.
 */
 
 #include<stdio.h>
@@ -8,15 +8,15 @@ x^3 - 3x^2 + (2/9.8)*(10^-3) = 0; where x = h/r where h is the height of the bal
 #include<math.h>
 
 double func_eval(double x){
-  return pow(x,3)-3*pow(x,2)+(2/(9.8))*pow(10,-3);
+  return 1000*pow(x,3)-3000*pow(x,2)+2;
 }
 
 double func_eval_derivative(double x){
-  return 3*pow(x,2)-6*x;
+  return 3000*pow(x,2)-6000*x;
 }
 
 int main(){
-    double relative_error_tolerance = 0.00625, x = 1.5, abs_relative_approx_error = relative_error_tolerance+1, next_x;
+    double relative_error_tolerance = 0.00625, x = 4, abs_relative_approx_error = relative_error_tolerance+1, next_x;
 
     while(abs_relative_approx_error>relative_error_tolerance){
         double func_x = func_eval(x), func_x_derivative = func_eval_derivative(x);
