@@ -1,0 +1,17 @@
+polynomials in numerical computation?
+drawbacks of gaussian elimination
+common regression functions
+gaussian elimination vs gauss seidel
+forward elimination vs back substitution
+pitfalls in Gaussian elimination
+number of digits 32 bit 64 bits
+common forms of numerical error
+why are polynomials convenient for numerical computation
+what are the convergent rates for newtons method
+splines are used for what?
+interpolation and regression, whats the difference
+how do you find roots
+methods of numerical interpolation we covered
+as well as homework 1 and 2 questions.
+sum of squares is used for what?
+integration comparisons
