@@ -3,9 +3,34 @@
 #include<lapacke.h>
 #include<math.h>
 
-void LU_T_matrix(int n_rows, int n_cols, double equation_A[n_rows][n_cols+1]){
+void partial_pivot(int n_rows, int n_cols, double matrix_GSE[n_rows][n_cols+1], int i){
+    int max_row = i, p_r=0, c_r=0;
+    for(int j=i+1; j<n_rows; j++){
+        if (matrix_GSE[j][i]<0){
+            p_r = -1*matrix_GSE[j][i];
+        }
+        if (matrix_GSE[max_row][i]<0){
+            c_r = -1*matrix_GSE[max_row][i];
+        }
+        if(p_r>c_r){
+            max_row = j;
+        }
+    }
+    if(max_row!=i){
+        for(int j=0; j<n_cols; j++){
+            double temp = matrix_GSE[i][j];
+            matrix_GSE[i][j] = matrix_GSE[max_row][j];
+            matrix_GSE[max_row][j] = temp;
+        }
+    }
+}
+
+void LU_T_matrix(int n_rows, int n_cols, double equation_A[n_rows][n_cols+1], int pivot_flag){
     double lower_T_matrix[n_rows][n_cols];
     for(int i=0; i<(n_rows); i++){
+        if(pivot_flag==1){
+            partial_pivot(n_rows, n_rows, equation_A, i);
+        }
         for(int j=0; j<(n_cols); j++){
             if (j>i){
                 double ratio = equation_A[j][i]/equation_A[i][i];
@@ -41,30 +66,6 @@ void solve_X(int n_rows, int n_cols, double equation_A[n_rows][n_cols+1],double 
         }
     }
     
-}
-
-void partial_pivot(int n_rows, int n_cols, double matrix_GSE[n_rows][n_cols+1]){
-    for(int i=0; i<n_rows; i++){
-        int max_row = i, p_r=0, c_r=0;
-        for(int j=i+1; j<n_rows; j++){
-            if (matrix_GSE[j][i]<0){
-                p_r = -1*matrix_GSE[j][i];
-            }
-            if (matrix_GSE[max_row][i]<0){
-                c_r = -1*matrix_GSE[max_row][i];
-            }
-            if(p_r>c_r){
-                max_row = j;
-            }
-        }
-        if(max_row!=i){
-            for(int j=0; j<n_cols; j++){
-                double temp = matrix_GSE[i][j];
-                matrix_GSE[i][j] = matrix_GSE[max_row][j];
-                matrix_GSE[max_row][j] = temp;
-            }
-        }
-    }
 }
 
 int main(int argc, char *argv[]){
@@ -110,14 +111,13 @@ int main(int argc, char *argv[]){
     }
     row_c-=1;
 
-    LU_T_matrix(row_c, row_c, matix_GE);
+    LU_T_matrix(row_c, row_c, matix_GE, 0);
     printf("Polynomial of degree %d by Gauss Elimination method\n", row_c-1);
     double ans_array_ge[row_c];
     solve_X(row_c, row_c, matix_GE, ans_array_ge);
 
     //Gauss Sidal Method
-    partial_pivot(row_c, row_c, matrix_GSE);
-    LU_T_matrix(row_c, row_c, matrix_GSE);
+    LU_T_matrix(row_c, row_c, matrix_GSE, 1);
     printf("Polynomial of degree %d by Gauss Sidal method\n", row_c-1);
     double ans_array_gse[row_c];
     solve_X(row_c, row_c, matrix_GSE, ans_array_gse);
