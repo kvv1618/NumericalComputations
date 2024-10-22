@@ -8,7 +8,7 @@ with open('rocket.txt', 'r') as f:
         cols = line.split(',')
         time_x.append(float(cols[0]))
         thrust_y.append(float(cols[-1]))
-        if float(cols[0]) == 1.9:
+        if float(cols[0]) == 1.9: #stopping creteria for infinite iterations
             break
 
 time_x = np.array(time_x)
