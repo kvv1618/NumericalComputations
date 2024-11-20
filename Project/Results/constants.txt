@@ -1,7 +1,7 @@
-Mean Semi-major axis: 109444031.56288806 kms
-Periheleion: 0.7137602900595876 AU
-Apoheleion: 0.7328811833264984 AU
-Eccentricity: 0.013217437505199834
-Mean Inclination: 3.39415026472638 degrees
-Mean Longitude of ascending node: 76.73822747264366 degrees
-Mean Argument of periapsis: 88.27113636265724 degrees
+Mean Semi-major axis: 109444168.34983853 kms
+Periheleion: 106777695.57047527538 kms
+Apoheleion: 109637482.51564788659 kms
+Eccentricity: 0.013214354790007146316
+Mean Inclination: 3.3940019733655222 degrees
+Mean Longitude of ascending node: 76.65871657844771 degrees
+Mean Argument of periapsis: 88.29658383476765 degrees
